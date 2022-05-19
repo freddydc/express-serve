@@ -21,7 +21,12 @@ router.get('/message', (req, res) => {
 router.post('/message', (req, res) => {
   console.log(req.query)
   console.log(req.body)
-  res.send(`Added message ${req.body.text}`)
+  res.status(201).send([
+    {
+      error: '',
+      body: 'Added message successfully'
+    }
+  ])
 })
 
 main.listen(port, () => {
