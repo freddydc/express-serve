@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["esnext", "dom"],
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "noEmit": true,
+    "strict": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
