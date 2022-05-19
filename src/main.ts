@@ -11,6 +11,10 @@ main.use(bodyParser.urlencoded({ extended: false }))
 main.use(router)
 
 router.get('/message', (req, res) => {
+  console.log(req.headers)
+  res.header({
+    'custom-header': 'Our custom value'
+  })
   res.send('Message list')
 })
 
