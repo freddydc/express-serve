@@ -29,6 +29,8 @@ router.post('/message', (req, res) => {
   }
 })
 
+main.use('/home', express.static('app'))
+
 main.listen(port, () => {
   console.log(`> Serve at http://localhost:${port}`)
 })
