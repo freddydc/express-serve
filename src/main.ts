@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser'
 import express from 'express'
+import { response } from './network/response'
 
 const main = express()
 const port = 5000
@@ -15,18 +16,17 @@ router.get('/message', (req, res) => {
   res.header({
     'custom-header': 'Our custom value'
   })
-  res.send('Message list')
+  response.success(req, res, 'Message list')
 })
 
 router.post('/message', (req, res) => {
   console.log(req.query)
   console.log(req.body)
-  res.status(201).send([
-    {
-      error: '',
-      body: 'Added message successfully'
-    }
-  ])
+  if (req.query.error == 'test') {
+    response.error(req, res, 'Test error success', 400)
+  } else {
+    response.success(req, res, 'Added message successfully', 201)
+  }
 })
 
 main.listen(port, () => {
