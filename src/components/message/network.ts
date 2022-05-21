@@ -1,5 +1,6 @@
 import express from 'express'
 import { response } from '../../network/response'
+import controller from './controller'
 
 export const message = express.Router()
 
@@ -12,17 +13,12 @@ message.get('/', (req, res) => {
 })
 
 message.post('/', (req, res) => {
-  console.log(req.query)
-  console.log(req.body)
-  if (req.query.error == 'test') {
-    response.error(
-      req,
-      res,
-      'An unexpected error ocurred',
-      500,
-      'Error details'
-    )
-  } else {
-    response.success(req, res, 'Added message successfully', 201)
-  }
+  controller
+    .addMessage(req.body.user, req.body.message)
+    .then(msg => {
+      response.success(req, res, msg, 201)
+    })
+    .catch(err => {
+      response.error(req, res, 'Invalid data', 400, err)
+    })
 })
