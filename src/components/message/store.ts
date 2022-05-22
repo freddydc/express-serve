@@ -1,16 +1,25 @@
+import dotenv from 'dotenv'
+import mongoose from 'mongoose'
+import Message from './model'
+
+dotenv.config()
+
+mongoose.Promise = global.Promise
+mongoose.connect(process.env.DATABASE_URL ?? '')
+
 type Message = {
   user: string
   message: string
   date: Date
 }
 
-const messages = [] as Message[]
-
 function addMessage(message: Message) {
-  messages.push(message)
+  const newMessage = new Message(message)
+  newMessage.save()
 }
 
-function getMessages() {
+async function getMessages() {
+  const messages = await Message.find({})
   return messages
 }
 
