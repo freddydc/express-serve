@@ -5,11 +5,14 @@ import controller from './controller'
 export const message = express.Router()
 
 message.get('/', (req, res) => {
-  console.log(req.headers)
-  res.header({
-    'custom-header': 'Our custom value'
-  })
-  response.success(req, res, 'Message list')
+  controller
+    .getMessages()
+    .then(msgList => {
+      response.success(req, res, msgList, 200)
+    })
+    .catch(err => {
+      response.error(req, res, 'Unexpected Error', 500, err)
+    })
 })
 
 message.post('/', (req, res) => {
