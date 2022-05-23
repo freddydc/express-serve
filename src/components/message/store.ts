@@ -23,7 +23,15 @@ async function getMessages() {
   return messages
 }
 
+async function updateMessage(id: string, message: string): Promise<Message> {
+  const oldMessage = await Message.findById(id)
+  oldMessage.message = message
+  const updatedMessage = await oldMessage.save()
+  return updatedMessage
+}
+
 export const store = {
   add: addMessage,
-  list: getMessages
+  list: getMessages,
+  updateText: updateMessage
 }

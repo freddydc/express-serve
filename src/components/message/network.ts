@@ -25,3 +25,14 @@ message.post('/', (req, res) => {
       response.error(req, res, 'Invalid data', 400, err)
     })
 })
+
+message.patch('/:id', (req, res) => {
+  controller
+    .updateMessage(req.params.id, req.body.message)
+    .then(msg => {
+      response.success(req, res, msg, 200)
+    })
+    .catch(err => {
+      response.error(req, res, 'Internal Error', 500, err)
+    })
+})

@@ -28,7 +28,20 @@ function getMessages() {
   })
 }
 
+function updateMessage(id: string, message: string) {
+  return new Promise<Message>((resolve, reject) => {
+    if (!id || !message) {
+      reject('Invalid Data')
+      return
+    }
+    store
+      .updateText(id, message)
+      .then(updatedMessage => resolve(updatedMessage))
+  })
+}
+
 export default {
   addMessage,
-  getMessages
+  getMessages,
+  updateMessage
 }
