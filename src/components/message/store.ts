@@ -18,8 +18,9 @@ function addMessage(message: Message) {
   newMessage.save()
 }
 
-async function getMessages() {
-  const messages = await Message.find({})
+async function getMessages(filterUser: string) {
+  const filter = filterUser ? { user: filterUser } : {}
+  const messages = await Message.find(filter)
   return messages
 }
 

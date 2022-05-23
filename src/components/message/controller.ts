@@ -22,9 +22,9 @@ function addMessage(user: string, message: string) {
   })
 }
 
-function getMessages() {
+function getMessages(filterUser: string) {
   return new Promise<Message[]>((resolve, reject) => {
-    resolve(store.list())
+    resolve(store.list(filterUser))
   })
 }
 

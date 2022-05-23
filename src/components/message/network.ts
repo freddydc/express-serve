@@ -5,8 +5,9 @@ import controller from './controller'
 export const message = express.Router()
 
 message.get('/', (req, res) => {
+  const filterUser = (req.query.user as string) ?? ''
   controller
-    .getMessages()
+    .getMessages(filterUser)
     .then(msgList => {
       response.success(req, res, msgList, 200)
     })
