@@ -1,11 +1,4 @@
-import dotenv from 'dotenv'
-import mongoose from 'mongoose'
 import Message from './model'
-
-dotenv.config()
-
-mongoose.Promise = global.Promise
-mongoose.connect(process.env.DATABASE_URL ?? '')
 
 type Message = {
   user: string

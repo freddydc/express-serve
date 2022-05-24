@@ -1,6 +1,12 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import { routers } from './network/routers'
+import dotenv from 'dotenv'
+import connect from './db'
+
+dotenv.config()
+
+connect(process.env.DATABASE_URL ?? '')
 
 const main = express()
 const port = 5000
