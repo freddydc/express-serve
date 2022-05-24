@@ -40,8 +40,26 @@ function updateMessage(id: string, message: string) {
   })
 }
 
+function removeMessage(id: string) {
+  return new Promise((resolve, reject) => {
+    if (!id) {
+      reject('Invalid Data')
+      return
+    }
+    store
+      .remove(id)
+      .then(() => {
+        resolve('Deleted Message')
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
 export default {
   addMessage,
   getMessages,
-  updateMessage
+  updateMessage,
+  removeMessage
 }

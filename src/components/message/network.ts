@@ -37,3 +37,14 @@ message.patch('/:id', (req, res) => {
       response.error(req, res, 'Internal Error', 500, err)
     })
 })
+
+message.delete('/:id', (req, res) => {
+  controller
+    .removeMessage(req.params.id)
+    .then(data => {
+      response.success(req, res, data, 200)
+    })
+    .catch(err => {
+      response.error(req, res, 'Internal Error', 500, err)
+    })
+})

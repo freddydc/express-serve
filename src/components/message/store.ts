@@ -31,8 +31,15 @@ async function updateMessage(id: string, message: string): Promise<Message> {
   return updatedMessage
 }
 
+function removeMessage(msgId: string) {
+  return Message.deleteOne({
+    _id: msgId
+  })
+}
+
 export const store = {
   add: addMessage,
   list: getMessages,
-  updateText: updateMessage
+  updateText: updateMessage,
+  remove: removeMessage
 }
