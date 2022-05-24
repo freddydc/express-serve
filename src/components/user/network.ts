@@ -14,3 +14,14 @@ user.post('/', (req, res) => {
       response.error(req, res, 'Internal Error', 500, err)
     })
 })
+
+user.get('/', (req, res) => {
+  controller
+    .getUsers()
+    .then(users => {
+      response.success(req, res, users, 200)
+    })
+    .catch(err => {
+      response.error(req, res, 'Internal Error', 500, err)
+    })
+})

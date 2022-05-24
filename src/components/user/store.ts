@@ -9,6 +9,11 @@ function addUser(user: User) {
   return newUser.save()
 }
 
+function getUsers() {
+  return User.find({})
+}
+
 export const store = {
-  add: addUser
+  add: addUser,
+  list: getUsers
 }

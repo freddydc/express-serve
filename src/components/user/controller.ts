@@ -16,6 +16,11 @@ function addUser(name: string): Promise<User> {
   return store.add(newUser)
 }
 
+function getUsers() {
+  return store.list()
+}
+
 export default {
-  addUser
+  addUser,
+  getUsers
 }
