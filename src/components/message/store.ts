@@ -11,10 +11,19 @@ function addMessage(message: Message) {
   newMessage.save()
 }
 
-async function getMessages(filterUser: string) {
-  const filter = filterUser ? { user: filterUser } : {}
-  const messages = await Message.find(filter)
-  return messages
+function getMessages(filterUser: string) {
+  return new Promise<Message[]>((resolve, reject) => {
+    const filter = filterUser ? { user: filterUser } : {}
+    Message.find(filter)
+      .populate('user')
+      .exec((err, data) => {
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(data as Message[])
+      })
+  })
 }
 
 async function updateMessage(id: string, message: string): Promise<Message> {
