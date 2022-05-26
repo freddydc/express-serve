@@ -11,9 +11,9 @@ function addMessage(message: Message) {
   newMessage.save()
 }
 
-function getMessages(filterUser: string) {
+function getMessages(filterMessage: string) {
   return new Promise<Message[]>((resolve, reject) => {
-    const filter = filterUser ? { user: filterUser } : {}
+    const filter = filterMessage ? { user: filterMessage } : {}
     Message.find(filter)
       .populate('user')
       .exec((err, data) => {

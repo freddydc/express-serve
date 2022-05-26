@@ -5,9 +5,9 @@ import controller from './controller'
 export const message = express.Router()
 
 message.get('/', (req, res) => {
-  const filterUser = (req.query.user as string) ?? ''
+  const filterMessage = (req.query.chat as string) ?? ''
   controller
-    .getMessages(filterUser)
+    .getMessages(filterMessage)
     .then(msgList => {
       response.success(req, res, msgList, 200)
     })
@@ -18,7 +18,7 @@ message.get('/', (req, res) => {
 
 message.post('/', (req, res) => {
   controller
-    .addMessage(req.body.user, req.body.message)
+    .addMessage(req.body.chat, req.body.user, req.body.message)
     .then(msg => {
       response.success(req, res, msg, 201)
     })

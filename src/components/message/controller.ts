@@ -6,25 +6,26 @@ type Message = {
   date: Date
 }
 
-function addMessage(user: string, message: string) {
+function addMessage(chat: string, user: string, message: string) {
   return new Promise<Message>((resolve, reject) => {
-    if (!user || !message) {
+    if (!chat || !user || !message) {
       reject('Message controller error')
       return
     }
     const newMessage = {
       user,
       message,
-      date: new Date()
+      date: new Date(),
+      chat
     }
     store.add(newMessage)
     resolve(newMessage)
   })
 }
 
-function getMessages(filterUser: string) {
+function getMessages(filterMessage: string) {
   return new Promise<Message[]>((resolve, reject) => {
-    resolve(store.list(filterUser))
+    resolve(store.list(filterMessage))
   })
 }
 
