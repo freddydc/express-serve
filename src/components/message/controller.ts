@@ -6,17 +6,27 @@ type Message = {
   date: Date
 }
 
-function addMessage(chat: string, user: string, message: string) {
+type File = {
+  filename: string
+}
+
+function addMessage(chat: string, user: string, message: string, file?: File) {
   return new Promise<Message>((resolve, reject) => {
     if (!chat || !user || !message) {
       reject('Message controller error')
       return
     }
+
+    const fileUrl = file
+      ? `http://localhost:5000/home/uploads/${file.filename}`
+      : ''
+
     const newMessage = {
       user,
       message,
       date: new Date(),
-      chat
+      chat,
+      file: fileUrl
     }
     store.add(newMessage)
     resolve(newMessage)

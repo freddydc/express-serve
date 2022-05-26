@@ -13,7 +13,8 @@ const messageSchema = new Schema({
     type: String,
     required: true
   },
-  date: Date
+  date: Date,
+  file: String
 })
 
 export default mongoose.models.Message ??

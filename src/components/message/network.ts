@@ -6,7 +6,7 @@ import multer from 'multer'
 export const message = express.Router()
 
 const upload = multer({
-  dest: 'uploads/'
+  dest: 'app/uploads/'
 })
 
 message.get('/', (req, res) => {
@@ -23,7 +23,7 @@ message.get('/', (req, res) => {
 
 message.post('/', upload.single('file'), (req, res) => {
   controller
-    .addMessage(req.body.chat, req.body.user, req.body.message)
+    .addMessage(req.body.chat, req.body.user, req.body.message, req.file)
     .then(msg => {
       response.success(req, res, msg, 201)
     })
