@@ -1,8 +1,13 @@
 import express from 'express'
 import { response } from '../../network/response'
 import controller from './controller'
+import multer from 'multer'
 
 export const message = express.Router()
+
+const upload = multer({
+  dest: 'uploads/'
+})
 
 message.get('/', (req, res) => {
   const filterMessage = (req.query.chat as string) ?? ''
@@ -16,7 +21,7 @@ message.get('/', (req, res) => {
     })
 })
 
-message.post('/', (req, res) => {
+message.post('/', upload.single('file'), (req, res) => {
   controller
     .addMessage(req.body.chat, req.body.user, req.body.message)
     .then(msg => {
