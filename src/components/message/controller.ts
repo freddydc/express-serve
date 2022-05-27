@@ -1,3 +1,4 @@
+import { socket } from '../../socket'
 import { store } from './store'
 
 type Message = {
@@ -29,6 +30,7 @@ function addMessage(chat: string, user: string, message: string, file?: File) {
       file: fileUrl
     }
     store.add(newMessage)
+    socket.io.emit('message', newMessage)
     resolve(newMessage)
   })
 }
