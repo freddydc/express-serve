@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import { routers } from './network/routers'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import connect from './db'
 import http from 'http'
@@ -16,6 +17,7 @@ const server = new http.Server(main)
 
 socketServer.create(server)
 
+main.use(cors())
 main.use(bodyParser.json())
 main.use(bodyParser.urlencoded({ extended: false }))
 
