@@ -13,7 +13,7 @@ function addMessage(message: Message) {
 
 function getMessages(filterMessage: string) {
   return new Promise<Message[]>((resolve, reject) => {
-    const filter = filterMessage ? { user: filterMessage } : {}
+    const filter = filterMessage ? { chat: filterMessage } : {}
     Message.find(filter)
       .populate('user')
       .exec((err, data) => {
