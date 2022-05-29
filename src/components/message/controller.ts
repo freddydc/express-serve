@@ -1,3 +1,4 @@
+import { config } from '../../config'
 import { socket } from '../../socket'
 import { store } from './store'
 
@@ -18,8 +19,10 @@ function addMessage(chat: string, user: string, message: string, file?: File) {
       return
     }
 
+    const { host, pubRoute, port, fileRoute } = config
+
     const fileUrl = file
-      ? `http://localhost:5000/home/uploads/${file.filename}`
+      ? `${host}:${port}/${pubRoute}/${fileRoute}/${file.filename}`
       : ''
 
     const newMessage = {

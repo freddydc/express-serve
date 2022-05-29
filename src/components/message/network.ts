@@ -2,11 +2,12 @@ import express from 'express'
 import { response } from '../../network/response'
 import controller from './controller'
 import multer from 'multer'
+import { config } from '../../config'
 
 export const message = express.Router()
 
 const upload = multer({
-  dest: 'app/uploads/'
+  dest: `app/${config.fileRoute}/`
 })
 
 message.get('/', (req, res) => {

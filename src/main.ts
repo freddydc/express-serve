@@ -1,18 +1,17 @@
+import 'dotenv/config'
 import bodyParser from 'body-parser'
 import express from 'express'
 import { routers } from './network/routers'
 import cors from 'cors'
-import dotenv from 'dotenv'
 import connect from './db'
 import http from 'http'
 import { socketServer } from './socket'
+import { config } from './config'
 
-dotenv.config()
-
-connect(process.env.DATABASE_URL ?? '')
+connect(config.dbUrl)
 
 const main = express()
-const port = 5000
+const port = config.port
 const server = new http.Server(main)
 
 socketServer.create(server)
@@ -23,8 +22,8 @@ main.use(bodyParser.urlencoded({ extended: false }))
 
 routers(main)
 
-main.use('/home', express.static('app'))
+main.use(`/${config.pubRoute}`, express.static('app'))
 
 server.listen(port, () => {
-  console.log(`> Serve at http://localhost:${port}`)
+  console.log(`> Serve at ${config.host}:${port}`)
 })
