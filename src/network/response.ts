@@ -15,8 +15,16 @@ type Error = <T>(
   details: string
 ) => void
 
+const statusMessages: Record<number, string> = {
+  200: 'Done',
+  201: 'Created',
+  400: 'Invalid Format',
+  500: 'Internal Error'
+}
+
 const success: Success = (req, res, message, status) => {
-  res.status(status || 200).send({
+  const statusCode = !status ? 200 : status
+  res.status(statusCode).send({
     error: '',
     body: message
   })
@@ -24,8 +32,10 @@ const success: Success = (req, res, message, status) => {
 
 const error: Error = (req, res, message, status, details) => {
   console.log(`> [ ERROR RESPONSE ] = ${details}`)
-  res.status(status || 500).send({
-    error: message,
+  const statusCode = !status ? 500 : status
+  const statusMessage = !message ? statusMessages[statusCode] : message
+  res.status(statusCode).send({
+    error: statusMessage,
     body: ''
   })
 }
