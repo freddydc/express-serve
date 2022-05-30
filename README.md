@@ -1,5 +1,7 @@
 # Express Serve
 
+This project contains the Express JS, MongoDB and WebSocket course
+
 ## How to work on this project?
 
 1. Clone the repository, if you haven't already:
